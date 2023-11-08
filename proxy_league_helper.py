@@ -1,18 +1,19 @@
+import argparse
+import io
 import json
 import math
-import random
-import typing
 import os
-import shutil
-import requests
+import random
 import re
+import shutil
 import subprocess
-import xml.etree.ElementTree as xml
 import sys
-import PIL.Image
-import io
-import argparse
+import typing
+import xml.etree.ElementTree as xml
+
 import consolemenu
+import PIL.Image
+import requests
 
 PLH_HOME = os.path.dirname(__file__)
 
@@ -334,7 +335,7 @@ def make_deck() -> SealedProduct:
         c for c in deck_valid_cards if "Creature" in c.supertypes()
     ]
 
-    for (rarity, creature) in zip(DECK_RARITIES, DECK_CREATURE_NONCREATURE):
+    for rarity, creature in zip(DECK_RARITIES, DECK_CREATURE_NONCREATURE):
         pool = deck_valid_cards
         if creature is True:
             pool = deck_valid_creature_cards
