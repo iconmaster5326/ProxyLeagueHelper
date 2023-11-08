@@ -1,37 +1,45 @@
 import setuptools
 import setuptools.command.install
+import setuptools.command.sdist
 import pathlib
+import os
 
 here = pathlib.Path(__file__).parent.resolve()
 long_description = (here / "README.md").read_text(encoding="utf-8")
 
+def download_deps():
+    import requests
 
-class install(setuptools.command.install.install):
-    def run(self):
-        import requests
-
-        setuptools.command.install.install.run(self)
-
-        def download(src: str, dest: str):
+    def download(src: str, dest: str):
+        if not os.path.exists(dest):
             response = requests.get(src)
             if not response.ok:
                 response.raise_for_status()
             with open(dest, "wb") as file:
                 file.write(response.content)
 
-        download(
-            "https://github.com/MagicSetEditorPacks/Full-Magic-Pack/raw/main/magicseteditor.com",
-            "MSE/magicseteditor.com",
-        )
-        download(
-            "https://github.com/MagicSetEditorPacks/Full-Magic-Pack/raw/main/magicseteditor.exe",
-            "MSE/magicseteditor.exe",
-        )
-        download(
-            "https://github.com/chilli-axe/mpc-autofill/releases/download/v4.4/autofill-windows.exe",
-            "autofill.exe",
-        )
+    download(
+        "https://github.com/MagicSetEditorPacks/Full-Magic-Pack/raw/main/magicseteditor.com",
+        "MSE/magicseteditor.com",
+    )
+    download(
+        "https://github.com/MagicSetEditorPacks/Full-Magic-Pack/raw/main/magicseteditor.exe",
+        "MSE/magicseteditor.exe",
+    )
+    download(
+        "https://github.com/chilli-axe/mpc-autofill/releases/download/v4.4/autofill-windows.exe",
+        "autofill.exe",
+    )
 
+class install(setuptools.command.install.install):
+    def run(self):
+        setuptools.command.install.install.run(self)
+        download_deps()
+
+class sdist(setuptools.command.sdist.sdist):
+    def run(self):
+        setuptools.command.sdist.sdist.run(self)
+        download_deps()
 
 setuptools.setup(
     name="proxy_league_helper",
@@ -69,5 +77,5 @@ setuptools.setup(
             "proxy_league_helper=proxy_league_helper:main",
         ],
     },
-    cmdclass={"install": install},
+    cmdclass={"install": install, "sdist": sdist},
 )
