@@ -32,7 +32,6 @@ setup(
             "MSE",
             "autofill.exe",
             "cardback.png",
-            "cards.json",
             "proxyleague.mse-symbol",
         ],
     },

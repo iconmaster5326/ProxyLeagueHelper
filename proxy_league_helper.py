@@ -188,11 +188,28 @@ valid_cards: typing.Dict[str, CardData]
 valid_basics: typing.Dict[str, typing.List[typing.Dict[str, typing.Any]]]
 cards_by_rarity: typing.List[typing.List[CardData]]
 
+CARDS_JSON_FILEPATH = "cards.json"
+
+def download_card_list():
+    response = requests.get("https://api.scryfall.com/bulk-data")
+    if not response.ok:
+        response.raise_for_status()
+    bulk_desc = json.loads(response.text)
+    bulk_category = [b for b in bulk_desc["data"] if b["type"] == "default_cards"][0]
+    
+    response = requests.get(bulk_category["download_uri"])
+    if not response.ok:
+        response.raise_for_status()
+    with open(CARDS_JSON_FILEPATH, "w", encoding="utf-8") as file:
+        file.write(response.text)
 
 def parse_card_list():
     global cards, valid_cards, valid_basics, cards_by_rarity
 
-    with open("cards.json", encoding="utf-8") as input_file:
+    if not os.path.exists(CARDS_JSON_FILEPATH):
+        download_card_list()
+
+    with open(CARDS_JSON_FILEPATH, encoding="utf-8") as input_file:
         cards = json.load(input_file)
 
     valid_cards = {}
@@ -988,13 +1005,22 @@ def main(argv: typing.List[str]) -> int:
 
 
 def show_main_menu(args: argparse.Namespace):
+    def redownload_cardlist():
+        print("Downloading card list... ", end="", flush=True)
+        download_card_list()
+        print("done.")
+        print("Reloading card list... ", end="", flush=True)
+        parse_card_list()
+        print("done.")
+        print("Card list updated successfully.")
+        input("(press ENTER to continue)")
+
     menu = consolemenu.ConsoleMenu("Welcome to the Proxy League Helper!")
     menu.append_item(
         consolemenu.items.FunctionItem("Generate cards", show_pack_menu, [args])
     )
-    menu.append_item(consolemenu.items.FunctionItem("Show statistics", lambda: None))
+    menu.append_item(consolemenu.items.FunctionItem("Re-download card list", redownload_cardlist))
     menu.show()
-
 
 def show_pack_menu(args: argparse.Namespace):
     generating = ""
