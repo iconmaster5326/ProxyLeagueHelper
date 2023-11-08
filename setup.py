@@ -1,10 +1,39 @@
-from setuptools import setup, find_packages
+import setuptools
+import setuptools.command.install
 import pathlib
 
 here = pathlib.Path(__file__).parent.resolve()
 long_description = (here / "README.md").read_text(encoding="utf-8")
 
-setup(
+
+class install(setuptools.command.install.install):
+    def run(self):
+        import requests
+
+        setuptools.command.install.install.run(self)
+
+        def download(src: str, dest: str):
+            response = requests.get(src)
+            if not response.ok:
+                response.raise_for_status()
+            with open(dest, "wb") as file:
+                file.write(response.content)
+
+        download(
+            "https://github.com/MagicSetEditorPacks/Full-Magic-Pack/raw/main/magicseteditor.com",
+            "MSE/magicseteditor.com",
+        )
+        download(
+            "https://github.com/MagicSetEditorPacks/Full-Magic-Pack/raw/main/magicseteditor.exe",
+            "MSE/magicseteditor.exe",
+        )
+        download(
+            "https://github.com/chilli-axe/mpc-autofill/releases/download/v4.4/autofill-windows.exe",
+            "autofill.exe",
+        )
+
+
+setuptools.setup(
     name="proxy_league_helper",
     version="0.1.0",
     description="Generate Magic: the Gathering cards for Proxy Leagues",
@@ -40,4 +69,5 @@ setup(
             "proxy_league_helper=proxy_league_helper:main",
         ],
     },
+    cmdclass={"install": install},
 )

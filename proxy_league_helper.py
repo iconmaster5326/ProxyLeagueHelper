@@ -190,18 +190,20 @@ cards_by_rarity: typing.List[typing.List[CardData]]
 
 CARDS_JSON_FILEPATH = "cards.json"
 
+
 def download_card_list():
     response = requests.get("https://api.scryfall.com/bulk-data")
     if not response.ok:
         response.raise_for_status()
     bulk_desc = json.loads(response.text)
     bulk_category = [b for b in bulk_desc["data"] if b["type"] == "default_cards"][0]
-    
+
     response = requests.get(bulk_category["download_uri"])
     if not response.ok:
         response.raise_for_status()
     with open(CARDS_JSON_FILEPATH, "w", encoding="utf-8") as file:
         file.write(response.text)
+
 
 def parse_card_list():
     global cards, valid_cards, valid_basics, cards_by_rarity
@@ -1019,8 +1021,11 @@ def show_main_menu(args: argparse.Namespace):
     menu.append_item(
         consolemenu.items.FunctionItem("Generate cards", show_pack_menu, [args])
     )
-    menu.append_item(consolemenu.items.FunctionItem("Re-download card list", redownload_cardlist))
+    menu.append_item(
+        consolemenu.items.FunctionItem("Re-download card list", redownload_cardlist)
+    )
     menu.show()
+
 
 def show_pack_menu(args: argparse.Namespace):
     generating = ""
