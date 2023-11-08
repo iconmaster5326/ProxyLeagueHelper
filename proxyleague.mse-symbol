@@ -1,0 +1,157 @@
+﻿mse_version: 0.3.5
+part:
+	type: shape
+	name: L right
+	combine: merge
+	point:
+		position: (0.7666666667,0.8000000000)
+		lock: free
+		line_after: line
+	point:
+		position: (0.9666666667,0.8666666667)
+		lock: free
+		line_after: line
+	point:
+		position: (0.9333333333,0.9666666667)
+		lock: free
+		line_after: line
+	point:
+		position: (0.7000000000,0.9000000000)
+		lock: free
+		line_after: line
+part:
+	type: shape
+	name: L left
+	combine: overlap
+	point:
+		position: (0.7703239134,0.2000000000)
+		lock: free
+		line_after: line
+	point:
+		position: (0.9000000000,0.2310143568)
+		lock: free
+		line_after: line
+	point:
+		position: (0.7371746267,0.9118138117)
+		lock: free
+		line_after: line
+	point:
+		position: (0.6074985400,0.8807994549)
+		lock: free
+		line_after: line
+part:
+	type: shape
+	name: P bar
+	combine: merge
+	point:
+		position: (0.4497702928,0.1376273759)
+		lock: free
+		line_after: line
+	point:
+		position: (0.3172548723,0.1228814911)
+		lock: free
+		line_after: line
+	point:
+		position: (0.2398389772,0.8185874485)
+		lock: free
+		line_after: line
+	point:
+		position: (0.3723543977,0.8333333333)
+		lock: free
+		line_after: line
+part:
+	type: shape
+	name: P ellipse mask
+	combine: subtract
+	point:
+		position: (0.4608297064,0.0334598906)
+		lock: free
+		line_after: line
+	point:
+		position: (0.1351261127,0.0000000000)
+		lock: free
+		line_after: line
+	point:
+		position: (0.0666666667,0.5679714570)
+		lock: free
+		line_after: line
+	point:
+		position: (0.3923702604,0.6014313475)
+		lock: free
+		line_after: line
+part:
+	type: shape
+	name: p inner circle
+	combine: subtract
+	point:
+		position: (0.5951389768,0.3382684350)
+		lock: size
+		line_after: curve
+		handle_before: (-0.0050899548,0.0457414059)
+		handle_after: (0.0050899548,-0.0457414059)
+	point:
+		position: (0.4884041619,0.2425436481)
+		lock: size
+		line_after: curve
+		handle_before: (0.0640379683,0.0071259367)
+		handle_after: (-0.0640379683,-0.0071259367)
+	point:
+		position: (0.3632369910,0.3124631367)
+		lock: size
+		line_after: curve
+		handle_before: (0.0050899548,-0.0457414059)
+		handle_after: (-0.0050899548,0.0457414059)
+	point:
+		position: (0.4699718059,0.4081879236)
+		lock: size
+		line_after: curve
+		handle_before: (-0.0640379683,-0.0071259367)
+		handle_after: (0.0640379683,0.0071259367)
+part:
+	type: shape
+	name: P outer circle
+	combine: overlap
+	point:
+		position: (0.6945255421,0.3493278486)
+		lock: size
+		line_after: curve
+		handle_before: (-0.0111979006,0.1006310930)
+		handle_after: (0.0111979006,-0.1006310930)
+	point:
+		position: (0.4663347204,0.1394706115)
+		lock: size
+		line_after: curve
+		handle_before: (0.1372242177,0.0152698644)
+		handle_after: (-0.1372242177,-0.0152698644)
+	point:
+		position: (0.1975927154,0.2940307807)
+		lock: size
+		line_after: curve
+		handle_before: (0.0111979006,-0.1006310930)
+		handle_after: (-0.0111979006,0.1006310930)
+	point:
+		position: (0.4257835372,0.5038880178)
+		lock: size
+		line_after: curve
+		handle_before: (-0.1372242177,-0.0152698644)
+		handle_after: (0.1372242177,0.0152698644)
+part:
+	type: shape
+	name: I
+	combine: overlap
+	point:
+		position: (0.0558361240,0.0355710194)
+		lock: free
+		line_after: line
+	point:
+		position: (0.0775614411,0.7352338029)
+		lock: free
+		line_after: line
+	point:
+		position: (0.2108305427,0.7310956473)
+		lock: free
+		line_after: line
+	point:
+		position: (0.1891052256,0.0314328638)
+		lock: free
+		line_after: line
