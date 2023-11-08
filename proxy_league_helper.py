@@ -998,7 +998,8 @@ def split_packs(
         yield result
 
 
-def main(argv: typing.List[str]) -> int:
+def main(argv: typing.Union[typing.List[str], None] = None) -> int:
+    argv = argv or sys.argv
     parser = argparse.ArgumentParser(
         argv[0], description="generates Proxy League cards"
     )
