@@ -34,6 +34,7 @@ jobs:
         pre-commit run --all-files
     - name: Build
       run: |
+        python3 setup.py build
         python3 -m pip install -e .
     - name: Test
       run: |

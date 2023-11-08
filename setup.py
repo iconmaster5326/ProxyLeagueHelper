@@ -2,6 +2,7 @@ import os
 import pathlib
 
 import setuptools
+import setuptools.command.build_py
 import setuptools.command.install
 import setuptools.command.sdist
 
@@ -14,6 +15,7 @@ def download_deps():
 
     def download(src: str, dest: str):
         if not os.path.exists(dest):
+            print(f"downloading {dest}...")
             response = requests.get(src)
             if not response.ok:
                 response.raise_for_status()
@@ -43,6 +45,12 @@ class install(setuptools.command.install.install):
 class sdist(setuptools.command.sdist.sdist):
     def run(self):
         setuptools.command.sdist.sdist.run(self)
+        download_deps()
+
+
+class build_py(setuptools.command.build_py.build_py):
+    def run(self):
+        setuptools.command.build_py.build_py.run(self)
         download_deps()
 
 
@@ -82,5 +90,5 @@ setuptools.setup(
             "proxy_league_helper=proxy_league_helper:main",
         ],
     },
-    cmdclass={"install": install, "sdist": sdist},
+    cmdclass={"install": install, "sdist": sdist, "build_py": build_py},
 )
