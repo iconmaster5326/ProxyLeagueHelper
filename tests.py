@@ -1,4 +1,4 @@
-from process_cardlist import *
+from proxy_league_helper import *
 
 parse_card_list()
 
@@ -33,14 +33,14 @@ for i, bracket in enumerate(BRACKETS):
 #         i += 1
 #         last_bracket = bracket
 
-for i in range(1):
-    pack = make_pack()
-    # print(f"pack {i+1}:")
-    # print(f"\tbasic - {basic_land}")
-    print(f"1 {pack.basic}")
-    for i, c in enumerate(pack.contents):
-        # print(f"\t{BRACKET_NAMES[pack_rarities[i]]} - {c.name()} ({min(c.prices):.2f})")
-        print(f"1 {c.name()}")
+# for i in range(1):
+#     pack = make_pack()
+#     # print(f"pack {i+1}:")
+#     # print(f"\tbasic - {basic_land}")
+#     print(f"1 {pack.basic}")
+#     for i, c in enumerate(pack.contents):
+#         # print(f"\t{BRACKET_NAMES[pack_rarities[i]]} - {c.name()} ({min(c.prices):.2f})")
+#         print(f"1 {c.name()}")
 
 for rarity in range(4):
     print(f"{BRACKET_NAMES[rarity]}:")
@@ -73,4 +73,4 @@ images = mse_gen_card_images(output_dir)
 for i, image in enumerate(mse_gen_card_image_sheets(images, len(output_pack))):
     image.save(os.path.join(output_dir, f"sheet{i+1}.png"))
 mpc_gen_order(output_dir, MPC_XML_FILENAME, output_pack)
-mpc_fulfill_order(MPC_XML_FILENAME)
+# mpc_fulfill_order(MPC_XML_FILENAME)
