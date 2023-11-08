@@ -14,6 +14,8 @@ import io
 import argparse
 import consolemenu
 
+PLH_HOME = os.path.dirname(__file__)
+
 # I'm too lazy to call a finance API for this; update it whenever the card list changes
 EUR_TO_USD = 1.07
 
@@ -188,7 +190,7 @@ valid_cards: typing.Dict[str, CardData]
 valid_basics: typing.Dict[str, typing.List[typing.Dict[str, typing.Any]]]
 cards_by_rarity: typing.List[typing.List[CardData]]
 
-CARDS_JSON_FILEPATH = "cards.json"
+CARDS_JSON_FILEPATH = os.path.join(PLH_HOME, "cards.json")
 
 
 def download_card_list():
@@ -455,7 +457,8 @@ COLORS_TO_WATERMARKS = {
 }
 
 MSE_SET_SYMBOL_FILENAME = "proxyleague.mse-symbol"
-MSE_PATH = "MSE/magicseteditor.com"
+MSE_SET_SYMBOL_FILEPATH = os.path.join(PLH_HOME, "proxyleague.mse-symbol")
+MSE_PATH = os.path.join(PLH_HOME, "MSE/magicseteditor.com")
 IMAGE_FORMAT = "{card.index}.png"
 
 
@@ -657,7 +660,7 @@ def mse_gen_set(output_dir: str, *packs: SealedProduct):
     os.mkdir(output_dir)
 
     shutil.copy(
-        MSE_SET_SYMBOL_FILENAME, os.path.join(output_dir, MSE_SET_SYMBOL_FILENAME)
+        MSE_SET_SYMBOL_FILEPATH, os.path.join(output_dir, MSE_SET_SYMBOL_FILENAME)
     )
 
     with open(os.path.join(output_dir, "set"), "w", encoding="utf-8") as set_file:
@@ -783,7 +786,7 @@ def mse_gen_card_image_sheets(
             n_cards = row = col = 0
 
 
-CARDBACK_FILEPATH = "cardback.png"
+CARDBACK_FILEPATH = os.path.join(PLH_HOME, "cardback.png")
 MPC_XML_FILENAME = "order.xml"
 MPC_BRACKETS = (
     18,
@@ -871,7 +874,7 @@ def mpc_fulfill_order(order_filepath: str):
     shutil.copy(order_filepath, MPC_XML_FILENAME)
     try:
         subprocess.run(
-            "./autofill",
+            os.path.join(PLH_HOME, "autofill"),
             input=b"\n\n\nn\n\n\n",
             stdout=sys.stdout,
             stderr=sys.stderr,
