@@ -19,6 +19,8 @@ And then running it is as simple as running this command:
 proxy_league_helper
 ```
 
+Do note that, because an integral part of this program, [Magic Set Editor](https://magicseteditor.boards.net/), is Windows-only, Proxy League Helper only works on Windows as well. Sorry, Unix people!
+
 # Usage
 
 You should be given a user interface in your terminal that allows you to generate cards, among other things. You have several options for what to make:
@@ -34,6 +36,15 @@ From there, you can generate the following:
 * [Magic Set Editor](https://magicseteditor.boards.net/) projects
 * Card images
 * [MPCFill](https://mpcfill.com/) order forms, for use in [MakePlayingCards](https://www.makeplayingcards.com/)
+
+# Customizing
+
+If you're hosting your own proxy league, you should ensure that your specific league is unique! Parts of this program are made to be altered by you. The parts you'll need to change for your own league include:
+
+* `cardback.png`: This the back of all your proxy league cards! There is a GIMP project file, `cardback.xcf`, if you need it. Make sure your card back is playing card sized (5:7 aspect ratio), and at least 300 dpi. Be sure to also label *VERY CLEARLY* that these cards are proxies, and are not for sale.
+* `proxyleague.mse-symbol`: This is your league's set symbol, showing up on every card. It's a [Magic Set Editor](https://magicseteditor.boards.net/) set symbol, so pop it into MSE's set symbol editor to change it.
+
+If you know what you're doing, you can also change the Magic Set Editor template for the cards, located in `MSE/data`. To change things like how rarities and packs are made, you'll need to dive into the code, located at `proxy_league_helper.py`.
 
 # Contributing
 
