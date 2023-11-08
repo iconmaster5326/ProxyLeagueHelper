@@ -1,11 +1,13 @@
+import os
+import pathlib
+
 import setuptools
 import setuptools.command.install
 import setuptools.command.sdist
-import pathlib
-import os
 
 here = pathlib.Path(__file__).parent.resolve()
 long_description = (here / "README.md").read_text(encoding="utf-8")
+
 
 def download_deps():
     import requests
@@ -31,15 +33,18 @@ def download_deps():
         "autofill.exe",
     )
 
+
 class install(setuptools.command.install.install):
     def run(self):
         setuptools.command.install.install.run(self)
         download_deps()
 
+
 class sdist(setuptools.command.sdist.sdist):
     def run(self):
         setuptools.command.sdist.sdist.run(self)
         download_deps()
+
 
 setuptools.setup(
     name="proxy_league_helper",
@@ -61,7 +66,7 @@ setuptools.setup(
     python_requires=">=3.8, <4",
     install_requires=["requests", "Pillow", "console-menu"],
     extras_require={
-        "dev": [],
+        "dev": ["pre-commit"],
         "test": [],
     },
     package_data={
